@@ -1,16 +1,13 @@
+{%extends 'meetups/base/base.html'%}
 {%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{meetup.title}}</title>
-    <link rel="stylesheet" href="{%static 'meetups/styles/base.css'%}">
-    <link rel="stylesheet" href="{%static 'meetups/styles/meetup-detail.css'%}">
-
-</head>
-<body>
-<main>
-    <article>
+{%block title%} {{meetup_title}} {%endblock%}
+{%block site_css%} <link rel="stylesheet" href="{%static 'meetups/styles/meetup-detail.css'%}">
+{%endblock%}
+{%block main_heading%}
+{{meetup_title}}
+{%endblock%}
+{%block body%}
+<article>
         <img scr=" " alt="">
         <section id ="location">
             <h2> Meetup location</h2>
@@ -29,7 +26,5 @@
             FORM
         </section>
     </article>
-</main>
+{%endblock%}
 
-</body>
-</html>

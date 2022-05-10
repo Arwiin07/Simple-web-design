@@ -1,46 +1,25 @@
+{% extends "meetups/base/base.html" %}
 {% load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All Meetups</title>
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css'%}">
-      <link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css'%}>
+{%block title%} All Meetups {%endblock%}
+{%block site_css%}
+<link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css'%}>
+{%endblock%}
+ {%block main_heading%}
+ We Got Meeting Coming UP!
+ {%endblock%}
+ {%block header_content%}
+ Find the one that best suits your needs!
 
-</head>
-<body>
-<header id="main-header">
-    <nav><a href="/meetups" id="main-logo">DjangoMeetups</a> </nav>
-    <h1> We got great meetups coming!</h1>
-    <p>
-        Find the one that best suits your needs!
-    </p>
-</header>
+ {%endblock%}
+{%block body%}
 <main>
 <section>
     <h2>Upcoming Meetups</h2>
     <ol>
         {%for meetups_items in meetups%}
-        <li class="meetup-item" >
-            <article>
-                <div class="meetup-summary">
-                    <div class="meetup-image">
-                    <img scr=" " alt=""> </div>
-                    <div>
-                        <div class="meetups-details">
-                            <h3> {{meetups_items.title}}</h3>
-                            <address>{{meetups_items.location}}</address>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="meetups-action">
-                        <a href="{%url 'meetups-detail' meetups_items.slug %}" class="btn">More details</a>
-                    </div>
-                </div>
-            </article>
-        </li>
+        {%include "meetups/includes/meetup-item.html" with title=meetups_items.title location=meetups_title.location%}
         {%endfor%}
     </ol>
-</section></main>
-</body>
-</html>
+</section>
+</main>
+{%endblock%}
