@@ -1,25 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Meetup
 
 def index(request):
-    meetups=[
-        {"title":"A first meetup","location":"NewYork","slug":"a-first-meetup"},
-        {"title":"A second meetup","location":"Paris","slug":"a-second-meetups"}
-    ]
+    meetups=Meetup.objects.all()
     return render(request,"meetups/index.html",{
-        "show_meetups":True ,
         "meetups":meetups
     })
 
 def meetup_details(request,meetup_slug ):
-    print(meetup_slug,'test')
-    selected_meetup={
-        "title":"A first meetup",
-        "description":"Our first meetup!"
-    }
-    return render(request,"meetups/meetup-details.html",{
-        "meetup_title":selected_meetup["title"],
-        "meetup_description":selected_meetup["description"]
+    try:
+        selected_meetup=Meetup.objects.get(slug=meetup_slug)
+        return render(request,"meetups/meetup-details.html",{
+            "meetup_found":True,
+            "meetup_title":selected_meetup.title,
+            "meetup_description":selected_meetup.description
     })
+    except Exception as ex:
+        return render(request,"meetups/meetup-details.html",{
+            "meetup_found":False
+        })
+
 
 # Create your views here.
