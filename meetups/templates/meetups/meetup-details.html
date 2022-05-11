@@ -7,6 +7,7 @@
 {{meetup_title}}
 {%endblock%}
 {%block body%}
+{%if meetup_found%}
 <article>
         <img scr=" " alt="">
         <section id ="location">
@@ -26,5 +27,8 @@
             FORM
         </section>
     </article>
-{%endblock%}
+{%else%}
+ <p> There is no meeting conducted for this slug!!!!</p>
+{%endif%}
 
+{%endblock%}
